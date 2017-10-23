@@ -1,4 +1,4 @@
-package ch.bbv.nosyparrot.backend.core.usecase;
+package ch.bbv.nosyparrot.backend.core.usecase.output;
 
 
 import ch.bbv.nosyparrot.backend.core.entity.Survey;

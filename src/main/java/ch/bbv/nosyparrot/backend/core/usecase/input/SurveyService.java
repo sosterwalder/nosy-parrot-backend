@@ -1,4 +1,4 @@
-package ch.bbv.nosyparrot.backend.core.usecase;
+package ch.bbv.nosyparrot.backend.core.usecase.input;
 
 import java.util.List;
 import ch.bbv.nosyparrot.backend.core.entity.Survey;
