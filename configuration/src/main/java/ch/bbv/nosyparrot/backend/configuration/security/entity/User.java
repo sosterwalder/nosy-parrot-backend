@@ -13,8 +13,9 @@ public class User implements ch.bbv.nosyparrot.backend.core.entity.User {
     private String username;
     private String password;
 
-    public User(long id, String username, String password) {
-        this.id = id;
+    public User() {}
+
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
