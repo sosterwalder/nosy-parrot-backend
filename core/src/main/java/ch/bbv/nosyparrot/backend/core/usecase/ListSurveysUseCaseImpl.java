@@ -1,13 +1,12 @@
 package ch.bbv.nosyparrot.backend.core.usecase;
 
-
+import java.util.List;
+import java.util.function.Consumer;
 import ch.bbv.nosyparrot.backend.core.entity.Survey;
 import ch.bbv.nosyparrot.backend.core.entity.SurveyEntityGateway;
 import ch.bbv.nosyparrot.backend.core.usecase.input.ListSurveysRequest;
 import ch.bbv.nosyparrot.backend.core.usecase.output.SurveyResponseModel;
 
-import java.util.List;
-import java.util.function.Consumer;
 
 public class ListSurveysUseCaseImpl implements ListSurveysUseCase {
     private final SurveyEntityGateway surveyEntityGateway;

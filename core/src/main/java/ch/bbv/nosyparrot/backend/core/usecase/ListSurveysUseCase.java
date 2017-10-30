@@ -5,6 +5,8 @@ import ch.bbv.nosyparrot.backend.core.usecase.input.ListSurveysRequest;
 import ch.bbv.nosyparrot.backend.core.usecase.output.SurveyResponseModel;
 
 
+@FunctionalInterface
+@UseCase
 public interface ListSurveysUseCase {
     void execute(ListSurveysRequest request, Consumer<SurveyResponseModel> responseModelFunction);
 }
