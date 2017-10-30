@@ -45,15 +45,50 @@ public class SurveyIntegrationTest {
     }
 
     @Test
+    public void returnStatusCodeForbidden_whenNoUserIsGiven() throws InterruptedException {
+        when()
+                .get("/surveys")
+                .then()
+                .statusCode(403);
+    }
+
+    @Test
+    public void returnAuthenticationToken_whenLoginIsSuccessful() throws InterruptedException {
+        String authHeader =
+        given()
+                .contentType("application/json")
+                .body(this.userJson.toString())
+        .when()
+                .post("login")
+        .then()
+                .statusCode(200)
+                .extract()
+                .header("Authorization");
+
+        assertThat(authHeader).isNotBlank().contains("Authorization").contains("Bearer");
+    }
+
+    /*
+    @Test
     public void returnAnEmptyList_whenNoSurveysAreAvailable() throws InterruptedException {
-        List<SurveyJson>  surveyJsonList = when()
+
+        given()
+                .contentType("application/json")
+                .header("Authorization", authHeader)
+        .when()
+                .get("/surveys")
+
+
+        List<SurveyJson> surveyJsonList = Arrays.asList(
+                when()
                 .get("/surveys")
                 .then()
                 .statusCode(200)
-                .extract().as(ArrayList.class);
+                .extract()
+                .as(SurveyJson[].class)
+        );
 
         assertThat(surveyJsonList).hasSize(0);
-
-
     }
+    */
 }
