@@ -10,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @SpringBootApplication
-@EnableJpaRepositories({"ch.bbv.nosyparrot.backend.configuration.security"})
+@EnableJpaRepositories({"ch.bbv.nosyparrot.backend.configuration"})
 public class Runner extends SpringBootServletInitializer {
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
