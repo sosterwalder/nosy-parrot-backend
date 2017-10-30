@@ -21,8 +21,8 @@ public class SurveyController {
 
     @GetMapping("/surveys")
     public List<SurveyJson> find(ListSurveysRequestParameter parameters) {
-        restController.find(parameters);
+        List<SurveyJson> surveyJsonList = restController.find(parameters);
 
-        return new ArrayList<>();
+        return surveyJsonList;
     }
 }
