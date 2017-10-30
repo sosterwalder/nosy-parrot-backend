@@ -12,7 +12,11 @@ public class SurveyResponseModelJsonListRepresenter implements Consumer<SurveyRe
 
     @Override
     public void accept(SurveyResponseModel surveyResponse) {
-        surveyJsonList.add(new SurveyJson(surveyResponse.getId(), surveyResponse.getTitle()));
+        SurveyJson surveyJson = new SurveyJson(
+                surveyResponse.getTitle(),
+                surveyResponse.getUser()
+        );
+        surveyJsonList.add(surveyJson);
     }
 
     public List<SurveyJson> getSurveyJsonList() {
