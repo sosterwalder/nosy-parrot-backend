@@ -1,5 +1,11 @@
-management: {
-  security: {
+management:
+  security:
     enabled: false
-  }
-}
+
+spring:
+  jpa:
+    show-sql: true
+
+# logging:
+#   level:
+#     root: WARN
