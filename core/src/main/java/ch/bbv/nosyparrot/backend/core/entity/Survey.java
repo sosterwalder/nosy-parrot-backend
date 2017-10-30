@@ -4,10 +4,12 @@ package ch.bbv.nosyparrot.backend.core.entity;
 public class Survey {
     private String id;
     private String title;
+    private User user;
 
-    public Survey(String id, String name) {
+    public Survey(String id, String name, User user) {
         this.id = id;
         this.title = name;
+        this.user = user;
     }
 
     public String getTitle() {
@@ -24,5 +26,13 @@ public class Survey {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

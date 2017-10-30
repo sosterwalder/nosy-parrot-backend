@@ -25,11 +25,15 @@ public class ListSurveysUseCaseImpl implements ListSurveysUseCase {
 
     private SurveyResponseModel getSurveyResponseModel(Survey survey) {
         // TODO: Get survey by user?
-        return new SurveyResponseModel(survey.getId(), survey.getTitle());
+        return new SurveyResponseModel(survey.getId(), survey.getTitle(), survey.getUser());
+    }
+
+    private SurveyEntityGateway getSurveyEntityGateway() {
+        return this.surveyEntityGateway;
     }
 
     private List<Survey> findSurveys(ListSurveysRequest request) {
-        return this.surveyEntityGateway.findAll();
+        return this.getSurveyEntityGateway().findAll();
 
     }
 
