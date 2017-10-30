@@ -4,7 +4,9 @@ package ch.bbv.nosyparrot.backend.core.usecase;
 import ch.bbv.nosyparrot.backend.core.entity.Survey;
 import ch.bbv.nosyparrot.backend.core.entity.SurveyEntityGateway;
 import ch.bbv.nosyparrot.backend.core.entity.SurveyFactory;
+import ch.bbv.nosyparrot.backend.core.entity.User;
 import ch.bbv.nosyparrot.backend.core.usecase.input.ListSurveysRequest;
+import ch.bbv.nosyparrot.backend.core.usecase.output.SurveyResponseModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -29,19 +31,22 @@ public class ListSurveysUseCaseImplTest {
     public void returnSurvey_whenOneSurveysIsPresent() {
         String surveyId = "surveyId";
         String surveyTitle = "surveyTitle";
+        User surveyUser = Mockito.mock(User.class);
 
         // Given
         List<Survey> surveyList = new ArrayList<>();
-        surveyList.add(SurveyFactory.create().createSurvey(surveyId, surveyTitle));
+        surveyList.add(SurveyFactory.create().createSurvey(surveyId, surveyTitle, surveyUser));
         doReturn(surveyList).when(surveyEntityGateway).findAll();
         ListSurveysRequest request = new ListSurveysRequest.Builder().build();
 
         // When
-        List<String> ids = new ArrayList<>();
-        listSurveysUseCase.execute(request, surveyResponseModel -> ids.add(surveyResponseModel.getId()));
+        List<SurveyResponseModel> surveys = new ArrayList<>();
+        listSurveysUseCase.execute(request, surveyResponseModel -> surveys.add(surveyResponseModel));
 
         // Then
-        assertThat(ids).hasSize(1);
-        assertThat(ids.stream().anyMatch(item -> surveyId.equals(item)));
+        assertThat(surveys).hasSize(1);
+        assertThat(surveys.stream().anyMatch(survey -> surveyId.equals(survey.getId())));
+        assertThat(surveys.stream().anyMatch(survey -> surveyTitle.equals(survey.getTitle())));
+        assertThat(surveys.stream().anyMatch(survey -> surveyUser.equals(survey.getUser())));
     }
 }
