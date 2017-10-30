@@ -11,16 +11,18 @@ import java.util.List;
 
 
 @org.springframework.web.bind.annotation.RestController
-public class SpringSurveyController {
+public class SurveyController {
     private RestController restController;
 
     @Autowired
-    public SpringSurveyController(RestController restController) {
+    public SurveyController(RestController restController) {
         this.restController = restController;
     }
 
     @GetMapping("/surveys")
     public List<SurveyJson> find(ListSurveysRequestParameter parameters) {
+        restController.find(parameters);
+
         return new ArrayList<>();
     }
 }

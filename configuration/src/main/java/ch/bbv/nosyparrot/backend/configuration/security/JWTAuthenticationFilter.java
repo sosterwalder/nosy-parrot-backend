@@ -1,4 +1,4 @@
-package ch.bbv.nosyparrot.backend.configuration.authentication;
+package ch.bbv.nosyparrot.backend.configuration.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import ch.bbv.nosyparrot.backend.configuration.authentication.entity.User;
+import ch.bbv.nosyparrot.backend.configuration.security.entity.User;
 
-import static ch.bbv.nosyparrot.backend.configuration.authentication.SecurityConstants.*;
+import static ch.bbv.nosyparrot.backend.configuration.security.SecurityConstants.*;
 
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {

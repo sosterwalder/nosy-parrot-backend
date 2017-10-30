@@ -1,4 +1,4 @@
-package ch.bbv.nosyparrot.backend.configuration.authentication;
+package ch.bbv.nosyparrot.backend.configuration.security;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

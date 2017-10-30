@@ -1,4 +1,4 @@
-package ch.bbv.nosyparrot.backend.configuration.authentication.entity;
+package ch.bbv.nosyparrot.backend.configuration.security.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
