@@ -2,9 +2,11 @@ package ch.bbv.nosyparrot.backend.interfaces.rest.viewmodel;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.ResourceSupport;
 
 
-public class SurveyJson {
+public class SurveyJson  extends ResourceSupport {
     private final String id;
     private final String title;
 
@@ -17,8 +19,8 @@ public class SurveyJson {
         this.title = title;
     }
 
-    public String getId() {
-        return id;
+    public Link getId() {
+        return Link.valueOf(id);
     }
 
     public String getTitle() {
