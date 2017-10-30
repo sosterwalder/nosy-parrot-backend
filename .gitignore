@@ -1,5 +1,7 @@
 # Compiled class file
 *.class
+# Build output
+*/out/
 
 # Log file
 *.log
@@ -32,3 +34,5 @@ gradle/
 
 # macOS
 **.DS_Store
+
+
