@@ -1,8 +1,8 @@
 package ch.bbv.nosyparrot.backend.configuration;
 
-import ch.bbv.nosyparrot.backend.core.entity.SurveyEntityGateway;
-import ch.bbv.nosyparrot.backend.core.usecase.ListSurveysUseCase;
-import ch.bbv.nosyparrot.backend.core.usecase.ListSurveysUseCaseImpl;
+import ch.bbv.nosyparrot.backend.usecases.core.entity.SurveyEntityGateway;
+import ch.bbv.nosyparrot.backend.usecases.core.step_definitions.listsurveys.ListSurveysUseCase;
+import ch.bbv.nosyparrot.backend.usecases.core.step_definitions.listsurveys.ListSurveysUseCaseImpl;
 import ch.bbv.nosyparrot.backend.interfaces.rest.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

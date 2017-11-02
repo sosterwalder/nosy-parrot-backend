@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.bbv.nosyparrot.backend.configuration.security.entity.UserFactory;
-import ch.bbv.nosyparrot.backend.core.entity.Survey;
-import ch.bbv.nosyparrot.backend.core.entity.SurveyEntityGateway;
-import ch.bbv.nosyparrot.backend.core.entity.SurveyFactory;
-import ch.bbv.nosyparrot.backend.core.entity.User;
+import ch.bbv.nosyparrot.backend.usecases.core.entity.Survey;
+import ch.bbv.nosyparrot.backend.usecases.core.entity.SurveyEntityGateway;
+import ch.bbv.nosyparrot.backend.usecases.core.entity.SurveyFactory;
+import ch.bbv.nosyparrot.backend.usecases.core.entity.User;
 
 
 public class SurveyJpaEntityGateway implements SurveyEntityGateway {

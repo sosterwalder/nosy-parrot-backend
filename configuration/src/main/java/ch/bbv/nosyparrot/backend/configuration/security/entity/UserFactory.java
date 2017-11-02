@@ -1,8 +1,8 @@
 package ch.bbv.nosyparrot.backend.configuration.security.entity;
 
-import ch.bbv.nosyparrot.backend.core.entity.User;
+import ch.bbv.nosyparrot.backend.usecases.core.entity.User;
 
-public class UserFactory implements ch.bbv.nosyparrot.backend.core.entity.UserFactory{
+public class UserFactory implements ch.bbv.nosyparrot.backend.usecases.core.entity.UserFactory{
     private UserFactory() {}
 
     @Override
