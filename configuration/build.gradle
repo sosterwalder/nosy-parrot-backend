@@ -20,8 +20,6 @@ repositories {
 }
 
 dependencies {
-    compile project(":interfaces:rest")
-
     compile group: 'org.springframework.boot', name: 'spring-boot-actuator', version: '5.+'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '5.+'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '5.+'
