@@ -1,7 +1,6 @@
 package ch.bbv.nosyparrot.backend.configuration;
 
 import ch.bbv.nosyparrot.backend.interfaces.rest.RestController;
-import ch.bbv.nosyparrot.backend.interfaces.rest.input.ListSurveysRequestParameter;
 import ch.bbv.nosyparrot.backend.interfaces.rest.viewmodel.SurveyJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

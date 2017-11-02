@@ -1,4 +1,4 @@
-package ch.bbv.nosyparrot.backend.interfaces.presenter;
+package ch.bbv.nosyparrot.backend.interfaces;
 
 import ch.bbv.nosyparrot.backend.usecases.output.ListSurveysOutputPort;
 import ch.bbv.nosyparrot.backend.usecases.output.ListSurveysResponse;
