@@ -20,6 +20,7 @@ repositories {
 }
 
 dependencies {
+    compile project(':usecases')
     compile group: 'org.springframework.boot', name: 'spring-boot-actuator', version: '5.+'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '5.+'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '5.+'
@@ -28,6 +29,7 @@ dependencies {
     compile group: 'com.h2database', name: 'h2', version: '1.4.+'
 
 
+    testCompile project(':usecases')
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile "org.springframework.boot:spring-boot-starter-test"
     testCompile "com.jayway.restassured:spring-mock-mvc:2.9.0"
