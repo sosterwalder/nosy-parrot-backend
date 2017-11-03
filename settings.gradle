@@ -1,7 +1,7 @@
 rootProject.name = 'nosy-parrot-backend'
 
 include 'core'
-include 'interfaces'
-include 'configuration'
 include 'usecases'
+include 'interfaces'
+include 'frameworks'
 
