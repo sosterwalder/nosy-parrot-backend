@@ -1,4 +1,4 @@
-package ch.bbv.nosyparrot.backend.configuration;
+package ch.bbv.nosyparrot.backend.frameworks;
 
 import ch.bbv.nosyparrot.backend.interfaces.rest.RestController;
 import ch.bbv.nosyparrot.backend.interfaces.rest.viewmodel.SurveyJson;
@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @org.springframework.web.bind.annotation.RestController
-public class SurveyController {
+public class SurveyRestController {
     private RestController restController;
 
     @Autowired
