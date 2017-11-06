@@ -1,6 +1,6 @@
-package ch.bbv.nosyparrot.backend.configuration.security;
+package ch.bbv.nosyparrot.backend.frameworks.security;
 
-import ch.bbv.nosyparrot.backend.configuration.security.entity.User;
+import ch.bbv.nosyparrot.backend.frameworks.security.entity.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

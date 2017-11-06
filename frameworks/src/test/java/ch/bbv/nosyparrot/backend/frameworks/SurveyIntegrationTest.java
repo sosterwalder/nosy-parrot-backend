@@ -1,4 +1,4 @@
-package ch.bbv.nosyparrot.backend.configuration;
+package ch.bbv.nosyparrot.backend.frameworks;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,4 +1,4 @@
-package ch.bbv.nosyparrot.backend.configuration.security;
+package ch.bbv.nosyparrot.backend.frameworks.security;
 
 public class SecurityConstants {
     public static final String SECRET = "SecretKeyToGenJWTs";

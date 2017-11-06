@@ -1,26 +1,33 @@
 package ch.bbv.nosyparrot.backend.frameworks;
 
-import ch.bbv.nosyparrot.backend.interfaces.rest.RestController;
-import ch.bbv.nosyparrot.backend.interfaces.rest.viewmodel.SurveyJson;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import ch.bbv.nosyparrot.backend.interfaces.ListSurveysController;
+import ch.bbv.nosyparrot.backend.interfaces.ListSurveysPresenter;
+import ch.bbv.nosyparrot.backend.interfaces.ListSurveysViewModel;
+import ch.bbv.nosyparrot.backend.usecases.ListSurveysUseCase;
+import ch.bbv.nosyparrot.backend.core.entity.Survey;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 
-@org.springframework.web.bind.annotation.RestController
+@RestController
 public class SurveyRestController {
-    private RestController restController;
+    private final ListSurveysUseCase listSurveysUseCase;
 
-    @Autowired
-    public SurveyController(RestController restController) {
-        this.restController = restController;
+    public SurveyRestController(ListSurveysUseCase listSurveysUseCase) {
+        this.listSurveysUseCase = listSurveysUseCase;
     }
 
-    @GetMapping("/surveys")
-    public List<SurveyJson> find(ListSurveysRequestParameter parameters) {
-        List<SurveyJson> surveyJsonList = restController.find(parameters);
+    @RequestMapping("/surveys")
+    public List<Survey> surveys(@RequestParam(value = "userId") long userId) {
+        ListSurveysController listSurveysController = new ListSurveysController(listSurveysUseCase);
+        listSurveysController.getSurveysForUserId(userId);
 
-        return surveyJsonList;
+        ListSurveysPresenter = listSurveysUseCase.get
+        ListSurveysViewModel listSurveysViewModel = listSurveysUseCase.listSurveysPresenter.getListSurveysViewModel();
+
+        return listSurveysViewModel.getSurveyList();
     }
 }

@@ -1,4 +1,4 @@
-package ch.bbv.nosyparrot.backend.configuration.security.entity;
+package ch.bbv.nosyparrot.backend.frameworks.security.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class User implements ch.bbv.nosyparrot.backend.usecases.core.entity.User {
+public class User implements ch.bbv.nosyparrot.backend.core.entity.User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

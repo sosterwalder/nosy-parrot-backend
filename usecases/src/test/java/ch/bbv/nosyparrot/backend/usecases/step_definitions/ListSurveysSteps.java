@@ -1,9 +1,9 @@
 package ch.bbv.nosyparrot.backend.usecases.step_definitions;
 
 import ch.bbv.nosyparrot.backend.usecases.ListSurveysUseCase;
-import ch.bbv.nosyparrot.backend.usecases.core.entity.Survey;
-import ch.bbv.nosyparrot.backend.usecases.core.entity.SurveyEntityGateway;
-import ch.bbv.nosyparrot.backend.usecases.core.entity.User;
+import ch.bbv.nosyparrot.backend.core.entity.Survey;
+import ch.bbv.nosyparrot.backend.core.entity.SurveyEntityGateway;
+import ch.bbv.nosyparrot.backend.core.entity.User;
 import ch.bbv.nosyparrot.backend.usecases.input.ListSurveysRequest;
 import ch.bbv.nosyparrot.backend.usecases.output.ListSurveysOutputPort;
 import ch.bbv.nosyparrot.backend.usecases.output.ListSurveysResponse;

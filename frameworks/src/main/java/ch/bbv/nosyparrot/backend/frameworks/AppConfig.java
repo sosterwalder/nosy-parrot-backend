@@ -1,9 +1,10 @@
-package ch.bbv.nosyparrot.backend.configuration;
+package ch.bbv.nosyparrot.backend.frameworks;
 
-import ch.bbv.nosyparrot.backend.usecases.core.entity.SurveyEntityGateway;
-import ch.bbv.nosyparrot.backend.usecases.core.step_definitions.listsurveys.ListSurveysUseCase;
-import ch.bbv.nosyparrot.backend.usecases.core.step_definitions.listsurveys.ListSurveysUseCaseImpl;
-import ch.bbv.nosyparrot.backend.interfaces.rest.RestController;
+import ch.bbv.nosyparrot.backend.core.entity.SurveyEntityGateway;
+import ch.
+import ch.bbv.nosyparrot.backend.interfaces.ListSurveysPresenter;
+import ch.bbv.nosyparrot.backend.usecases.ListSurveysUseCase;
+import ch.bbv.nosyparrot.backend.usecases.output.ListSurveysOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,10 +16,11 @@ public class AppConfig {
     private SurveyJpaEntityRepository surveyJpaEntityRepository;
 
     @Bean
-    public RestController getRestController() {
+    public SurveyRestController getSurveyRestController() {
         final SurveyEntityGateway surveyEntityGateway = new SurveyJpaEntityGateway(this.surveyJpaEntityRepository);
-        final ListSurveysUseCase listSurveysUseCase = new ListSurveysUseCaseImpl(surveyEntityGateway);
+        final ListSurveysPresenter listSurveysPresenter = new ListSurveysPresenter();
+        final ListSurveysUseCase listSurveysUseCase = new ListSurveysUseCase(listSurveysPresenter, surveyEntityGateway);
 
-        return new RestController(listSurveysUseCase);
+        return new SurveyRestController(listSurveysUseCase);
     }
 }

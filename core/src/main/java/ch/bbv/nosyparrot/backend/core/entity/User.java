@@ -1,4 +1,4 @@
-package ch.bbv.nosyparrot.backend.usecases.core.entity;
+package ch.bbv.nosyparrot.backend.core.entity;
 
 
 public interface User {

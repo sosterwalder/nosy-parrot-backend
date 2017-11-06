@@ -1,7 +1,7 @@
 package ch.bbv.nosyparrot.backend.usecases;
 
-import ch.bbv.nosyparrot.backend.usecases.core.entity.Survey;
-import ch.bbv.nosyparrot.backend.usecases.core.entity.SurveyEntityGateway;
+import ch.bbv.nosyparrot.backend.core.entity.Survey;
+import ch.bbv.nosyparrot.backend.core.entity.SurveyEntityGateway;
 import ch.bbv.nosyparrot.backend.usecases.input.ListSurveysInputPort;
 import ch.bbv.nosyparrot.backend.usecases.input.ListSurveysRequest;
 import ch.bbv.nosyparrot.backend.usecases.output.ListSurveysOutputPort;

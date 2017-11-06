@@ -1,6 +1,6 @@
 package ch.bbv.nosyparrot.backend.usecases.output;
 
-import ch.bbv.nosyparrot.backend.usecases.core.entity.Survey;
+import ch.bbv.nosyparrot.backend.core.entity.Survey;
 
 import java.util.List;
 

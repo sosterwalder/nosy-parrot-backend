@@ -1,6 +1,6 @@
-package ch.bbv.nosyparrot.backend.configuration;
+package ch.bbv.nosyparrot.backend.frameworks;
 
-import ch.bbv.nosyparrot.backend.configuration.security.entity.User;
+import ch.bbv.nosyparrot.backend.frameworks.security.entity.User;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,20 +10,20 @@ import javax.persistence.ManyToOne;
 @Entity
 public class SurveyJpaEntity {
     @Id
-    private String id;
+    private long id;
     private String title;
     @ManyToOne
     private User user;
 
     protected SurveyJpaEntity() {}
 
-    public SurveyJpaEntity(String id, String title, User user) {
+    public SurveyJpaEntity(long id, String title, User user) {
         this.id = id;
         this.title = title;
         this.user = user;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 

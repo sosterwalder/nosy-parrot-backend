@@ -1,6 +1,6 @@
-package ch.bbv.nosyparrot.backend.configuration.security;
+package ch.bbv.nosyparrot.backend.frameworks.security;
 
-import ch.bbv.nosyparrot.backend.configuration.security.entity.User;
+import ch.bbv.nosyparrot.backend.frameworks.security.entity.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -1,4 +1,4 @@
-package ch.bbv.nosyparrot.backend.configuration.security;
+package ch.bbv.nosyparrot.backend.frameworks.security;
 
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static ch.bbv.nosyparrot.backend.configuration.security.SecurityConstants.HEADER_STRING;
-import static ch.bbv.nosyparrot.backend.configuration.security.SecurityConstants.SECRET;
-import static ch.bbv.nosyparrot.backend.configuration.security.SecurityConstants.TOKEN_PREFIX;
+import static ch.bbv.nosyparrot.backend.frameworks.security.SecurityConstants.HEADER_STRING;
+import static ch.bbv.nosyparrot.backend.frameworks.security.SecurityConstants.SECRET;
+import static ch.bbv.nosyparrot.backend.frameworks.security.SecurityConstants.TOKEN_PREFIX;
 
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
