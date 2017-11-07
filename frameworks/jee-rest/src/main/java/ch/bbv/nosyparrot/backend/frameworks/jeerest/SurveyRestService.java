@@ -1,22 +1,41 @@
 package ch.bbv.nosyparrot.backend.frameworks.jeerest;
 
 import ch.bbv.nosyparrot.backend.core.entity.Survey;
+import ch.bbv.nosyparrot.backend.interfaces.ListSurveysController;
+import ch.bbv.nosyparrot.backend.interfaces.ListSurveysPresenter;
+import ch.bbv.nosyparrot.backend.interfaces.ListSurveysViewModel;
+import ch.bbv.nosyparrot.backend.usecases.ListSurveysUseCase;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.ext.Provider;
-import java.util.ArrayList;
 import java.util.List;
 
 
-@Provider
+@Path("/surveys")
 public class SurveyRestService {
-    @Path("surveys")
+    @Inject
+    private ListSurveysUseCase listSurveysUseCase;
+    @Inject
+    private ListSurveysPresenter listSurveysPresenter;
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Survey> surveys() {
-        return new ArrayList<>();
+        ListSurveysController listSurveysController = new ListSurveysController(listSurveysUseCase);
+        listSurveysController.getSurveys();
+        ListSurveysViewModel listSurveysViewModel = this.listSurveysPresenter.getListSurveysViewModel();
+
+        return listSurveysViewModel.getSurveyList();
+    }
+
+    public void setListSurveysUseCase(ListSurveysUseCase listSurveysUseCase) {
+        this.listSurveysUseCase = listSurveysUseCase;
+    }
+
+    public void setListSurveysPresenter(ListSurveysPresenter listSurveysPresenter) {
+        this.listSurveysPresenter = listSurveysPresenter;
     }
 }
