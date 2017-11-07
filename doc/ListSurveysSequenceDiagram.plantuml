@@ -1,0 +1,9 @@
+@startuml
+actor User
+User -> SurveyRestController : GET /surveys
+SurveyRestController -> ListSurveysController : listSurveys(...)
+ListSurveysController -> UseCase : listSurveys(RequestModel)
+UseCase -> SurveyEntityGateway : getAll()
+UseCase <-- SurveyEntityGateway : List<Survey>
+UseCase -> Presenter : presentListOfSurveys(ResponseModel)
+@enduml

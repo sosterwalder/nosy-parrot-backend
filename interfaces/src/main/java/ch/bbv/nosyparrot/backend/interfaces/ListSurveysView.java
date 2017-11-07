@@ -6,8 +6,14 @@ import ch.bbv.nosyparrot.backend.core.entity.Survey;
 import java.util.List;
 
 public class ListSurveysView implements ListSurveysPresenterOutputPort {
+    private List<Survey> surveyList;
+
     @Override
-    public List<Survey> presentListOfSurveys(ListSurveysViewModel viewModel) {
-        return viewModel.getSurveyList();
+    public void presentListOfSurveys(ListSurveysViewModel viewModel) {
+        this.surveyList = viewModel.getSurveyList();
+    }
+
+    public List<Survey> getSurveyList() {
+        return surveyList;
     }
 }

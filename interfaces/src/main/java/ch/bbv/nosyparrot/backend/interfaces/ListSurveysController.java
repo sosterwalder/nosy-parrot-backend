@@ -10,10 +10,8 @@ public class ListSurveysController {
         this.listSurveysInputPort = listSurveysInputPort;
     }
 
-    public void getSurveysForUserId(long userId) {
-        ListSurveysRequest listSurveysRequest = new ListSurveysRequest(userId);
+    public void getSurveys() {
+        ListSurveysRequest listSurveysRequest = new ListSurveysRequest();
         listSurveysInputPort.listSurveys(listSurveysRequest);
     }
-
-
 }

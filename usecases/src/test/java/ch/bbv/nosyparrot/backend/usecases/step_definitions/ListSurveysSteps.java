@@ -36,16 +36,17 @@ public class ListSurveysSteps implements En {
         });
         When("^the user has created (\\d+) surveys$", (Integer numberOfSurveys) -> {
             this.surveyEntityGateway = Mockito.mock(SurveyEntityGateway.class);
-            OngoingStubbing<List> stubbing = when(this.surveyEntityGateway.findByUser(anyLong()));
+            OngoingStubbing<List> stubbing = when(this.surveyEntityGateway.getAll());
             this.surveyList = new ArrayList<>();
             IntStream.range(0, numberOfSurveys).forEachOrdered(n -> {
-                Survey tempSurvey = new Survey(ListSurveysSteps.surveyId, ListSurveysSteps.surveyName, this.surveyUser);
+                Survey tempSurvey = new Survey(ListSurveysSteps.surveyId, ListSurveysSteps.surveyName);
                 this.surveyList.add(tempSurvey);
             });
             stubbing.thenReturn(this.surveyList);
         });
         And("^he asks to retrieve his list of surveys$", () -> {
-            ListSurveysRequest listSurveysRequest = new ListSurveysRequest(1234);
+            // ListSurveysRequest listSurveysRequest = new ListSurveysRequest(1234);
+            ListSurveysRequest listSurveysRequest = new ListSurveysRequest();
             this.listSurveysOutputPort = Mockito.mock(ListSurveysOutputPort.class);
             ListSurveysUseCase listSurveysUseCase = new ListSurveysUseCase(listSurveysOutputPort, surveyEntityGateway);
             listSurveysUseCase.listSurveys(listSurveysRequest);

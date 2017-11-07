@@ -14,3 +14,15 @@ dependencies {
     testCompile group: 'info.cukes', name: 'cucumber-java8', version: '1.2.5'
     testCompile group: 'info.cukes', name: 'cucumber-junit', version: '1.2.5'
 }
+
+task testCucumber(type: JavaExec, dependsOn: [testClasses]) {
+    description = 'Runs all feature files with Cucumber'
+    // ext.outputDir = file("$buildDir/target/reports")
+
+    classpath = sourceSets.test.runtimeClasspath
+    main = 'cucumber.api.cli.Main'
+    args    '--plugin', 'pretty',
+            '--glue', 'ch.bbv.nosyparrot.backend.interfaces.step_definitions',   // foo.bar.fum.cucumber is the package for Steps, Hooks etc.
+            '--strict',
+            sourceSets.test.output.resourcesDir // Find feature files stored in src/test/resources
+}

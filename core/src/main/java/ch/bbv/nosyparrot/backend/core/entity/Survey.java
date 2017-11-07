@@ -6,7 +6,7 @@ public class Survey {
     private String title;
     private User user;
 
-    public Survey(long id, String name, User user) {
+    public Survey(long id, String name) {
         this.id = id;
         this.title = name;
         this.user = user;
@@ -26,13 +26,5 @@ public class Survey {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }

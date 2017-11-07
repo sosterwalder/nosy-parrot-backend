@@ -19,14 +19,17 @@ public class ListSurveysUseCase implements ListSurveysInputPort {
         this.surveyEntityGateway = surveyEntityGateway;
     }
 
+    public ListSurveysOutputPort getListSurveysOutputPort() {
+        return listSurveysOutputPort;
+    }
+
     @Override
     public void listSurveys(ListSurveysRequest listSurveysRequest) {
-        // Extract data from the request model.
-        final long userId = listSurveysRequest.getUserId();
+        // TODO: Extract data from request
 
         // Pass the needed data from the request model to the entity gateway
         // and receive the result.
-        List<Survey> surveyList = this.surveyEntityGateway.findByUser(userId);
+        List<Survey> surveyList = this.surveyEntityGateway.getAll();
 
         // Create a response model from the received result.
         ListSurveysResponse listSurveysResponse = new ListSurveysResponse(surveyList);
