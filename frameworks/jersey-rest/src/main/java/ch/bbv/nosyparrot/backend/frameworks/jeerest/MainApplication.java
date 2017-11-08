@@ -10,7 +10,6 @@ public class MainApplication extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resourceSet = new HashSet<>();
-        resourceSet.add(AppConfig.class);
         resourceSet.add(SurveyRestService.class);
 
         return resourceSet;

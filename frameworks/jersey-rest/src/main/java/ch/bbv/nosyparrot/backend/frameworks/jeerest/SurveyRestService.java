@@ -1,6 +1,7 @@
 package ch.bbv.nosyparrot.backend.frameworks.jeerest;
 
 import ch.bbv.nosyparrot.backend.core.entity.Survey;
+import ch.bbv.nosyparrot.backend.core.entity.SurveyEntityGateway;
 import ch.bbv.nosyparrot.backend.interfaces.ListSurveysController;
 import ch.bbv.nosyparrot.backend.interfaces.ListSurveysPresenter;
 import ch.bbv.nosyparrot.backend.interfaces.ListSurveysViewModel;
@@ -16,10 +17,14 @@ import java.util.List;
 
 @Path("/surveys")
 public class SurveyRestService {
-    @Inject
     private ListSurveysUseCase listSurveysUseCase;
-    @Inject
     private ListSurveysPresenter listSurveysPresenter;
+
+    public SurveyRestService() {
+        final SurveyEntityGateway surveyEntityGateway = new SurveyDummyEntityGateway();
+        this.listSurveysPresenter = new ListSurveysPresenter();
+        this.listSurveysUseCase = new ListSurveysUseCase(this.listSurveysPresenter, surveyEntityGateway);
+    }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
