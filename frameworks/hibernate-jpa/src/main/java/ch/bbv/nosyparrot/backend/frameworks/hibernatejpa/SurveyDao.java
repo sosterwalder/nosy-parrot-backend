@@ -1,11 +1,7 @@
 package ch.bbv.nosyparrot.backend.frameworks.hibernatejpa;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.internal.SessionImpl;
 
 import java.util.List;
 
@@ -14,27 +10,14 @@ public class SurveyDao implements SurveyDaoInterface<SurveyJpaEntity, Long> {
     private Session currentSession;
     private Transaction currentTransaction;
 
-    private static SessionFactory sessionFactory;
-
-    static {
-        Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
-        configuration.addAnnotatedClass(SurveyJpaEntity.class);
-
-        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
-        builder.applySettings(configuration.getProperties());
-
-        SurveyDao.sessionFactory = configuration.buildSessionFactory(builder.build());
-
-    }
-
     public Session openCurrentSession() {
-        this.currentSession = this.getSessionFactory().openSession();
+        this.currentSession = HibernateUtil.getSessionFactory().openSession();
 
         return this.currentSession;
     }
 
     public Session openCurrentSessionWithTransaction() {
-        this.currentSession = this.getSessionFactory().openSession();
+        this.currentSession = HibernateUtil.getSessionFactory().openSession();
         this.currentTransaction = this.currentSession.beginTransaction();
 
         return this.currentSession;
@@ -104,9 +87,5 @@ public class SurveyDao implements SurveyDaoInterface<SurveyJpaEntity, Long> {
         for (SurveyJpaEntity survey : surveyList) {
             this.delete(survey);
         }
-    }
-
-    private static SessionFactory getSessionFactory() {
-        return SurveyDao.sessionFactory;
     }
 }
