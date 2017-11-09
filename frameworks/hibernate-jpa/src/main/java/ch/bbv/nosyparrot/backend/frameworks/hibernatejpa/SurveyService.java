@@ -27,6 +27,18 @@ public class SurveyService implements SurveyEntityGateway {
         return surveyList;
     }
 
+    @Override
+    public List<Survey> create(String title) {
+        SurveyJpaEntity surveyJpaEntity = new SurveyJpaEntity(title);
+
+        surveyDao.openCurrentSession();
+        surveyDao.persist(surveyJpaEntity);
+        surveyDao.closeCurrentSession();
+
+        // TODO: Fix this
+        return this.getAll();
+    }
+
     private Survey surveyJpaEntityToDomain(SurveyJpaEntity entity) {
         return SurveyFactory.create().createSurvey(
                 entity.getId(),

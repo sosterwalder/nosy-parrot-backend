@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.internal.SessionImpl;
 
 import java.util.List;
 
@@ -12,6 +13,19 @@ import java.util.List;
 public class SurveyDao implements SurveyDaoInterface<SurveyJpaEntity, Long> {
     private Session currentSession;
     private Transaction currentTransaction;
+
+    private static SessionFactory sessionFactory;
+
+    static {
+        Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
+        configuration.addAnnotatedClass(SurveyJpaEntity.class);
+
+        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
+        builder.applySettings(configuration.getProperties());
+
+        SurveyDao.sessionFactory = configuration.buildSessionFactory(builder.build());
+
+    }
 
     public Session openCurrentSession() {
         this.currentSession = this.getSessionFactory().openSession();
@@ -93,14 +107,6 @@ public class SurveyDao implements SurveyDaoInterface<SurveyJpaEntity, Long> {
     }
 
     private static SessionFactory getSessionFactory() {
-        Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
-        configuration.addAnnotatedClass(SurveyJpaEntity.class);
-
-        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
-        builder.applySettings(configuration.getProperties());
-
-        SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());
-
-        return sessionFactory;
+        return SurveyDao.sessionFactory;
     }
 }
