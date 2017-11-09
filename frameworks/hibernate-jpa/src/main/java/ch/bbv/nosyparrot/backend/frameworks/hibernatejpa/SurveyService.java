@@ -31,9 +31,9 @@ public class SurveyService implements SurveyEntityGateway {
     public List<Survey> create(String title) {
         SurveyJpaEntity surveyJpaEntity = new SurveyJpaEntity(title);
 
-        surveyDao.openCurrentSession();
+        surveyDao.openCurrentSessionWithTransaction();
         surveyDao.persist(surveyJpaEntity);
-        surveyDao.closeCurrentSession();
+        surveyDao.closeCurrentSessionWithTransaction();
 
         // TODO: Fix this
         return this.getAll();

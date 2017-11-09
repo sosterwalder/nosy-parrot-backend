@@ -32,22 +32,6 @@ public class SurveyDao implements SurveyDaoInterface<SurveyJpaEntity, Long> {
         this.closeCurrentSession();
     }
 
-    public Session getCurrentSession() {
-        return this.currentSession;
-    }
-
-    public void setCurrentSession(Session session) {
-        this.currentSession = session;
-    }
-
-    public Transaction getCurrentTransaction() {
-        return currentTransaction;
-    }
-
-    public void setCurrentTransaction(Transaction currentTransaction) {
-        this.currentTransaction = currentTransaction;
-    }
-
     @Override
     public void persist(SurveyJpaEntity entity) {
         this.currentSession.save(entity);
