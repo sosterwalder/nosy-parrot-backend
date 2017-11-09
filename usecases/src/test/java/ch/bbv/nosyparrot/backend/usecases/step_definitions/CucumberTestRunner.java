@@ -9,5 +9,5 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "classpath:features"
 )
-public class ListSurveysTestRunner {}
+public class CucumberTestRunner {}
 
