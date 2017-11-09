@@ -1,13 +1,12 @@
 package ch.bbv.nosyparrot.backend.frameworks.jeerest;
 
 import ch.bbv.nosyparrot.backend.core.entity.Survey;
-import ch.bbv.nosyparrot.backend.core.entity.SurveyEntityGateway;
+import ch.bbv.nosyparrot.backend.frameworks.hibernatejpa.SurveyService;
 import ch.bbv.nosyparrot.backend.interfaces.ListSurveysController;
 import ch.bbv.nosyparrot.backend.interfaces.ListSurveysPresenter;
 import ch.bbv.nosyparrot.backend.interfaces.ListSurveysViewModel;
 import ch.bbv.nosyparrot.backend.usecases.ListSurveysUseCase;
 
-import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -21,9 +20,9 @@ public class SurveyRestService {
     private ListSurveysPresenter listSurveysPresenter;
 
     public SurveyRestService() {
-        final SurveyEntityGateway surveyEntityGateway = new SurveyDummyEntityGateway();
+        final SurveyService surveyService = new SurveyService();
         this.listSurveysPresenter = new ListSurveysPresenter();
-        this.listSurveysUseCase = new ListSurveysUseCase(this.listSurveysPresenter, surveyEntityGateway);
+        this.listSurveysUseCase = new ListSurveysUseCase(this.listSurveysPresenter, surveyService);
     }
 
     @GET

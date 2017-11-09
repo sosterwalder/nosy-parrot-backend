@@ -1,0 +1,29 @@
+version 'unspecified'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+apply plugin: 'java'
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencies {}
+}
+
+repositories {
+    jcenter()
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':interfaces')
+    compile group: 'com.h2database', name: 'h2', version: '1.4.196'
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.0.12.Final'
+
+    testCompile project(':interfaces')
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
