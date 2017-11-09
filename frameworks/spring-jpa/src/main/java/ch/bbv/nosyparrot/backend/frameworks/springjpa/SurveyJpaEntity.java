@@ -16,13 +16,12 @@ public class SurveyJpaEntity implements Serializable {
 
     protected SurveyJpaEntity() {}
 
-    public SurveyJpaEntity(long id, String title) {
-        this.id = id;
+    public SurveyJpaEntity(String title) {
         this.title = title;
     }
 
     public long getId() {
-        return id;
+        return this.id;
     }
 
     public String getTitle() {
