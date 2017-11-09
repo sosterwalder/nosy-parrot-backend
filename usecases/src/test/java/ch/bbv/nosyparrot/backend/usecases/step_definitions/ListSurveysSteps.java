@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 
@@ -48,7 +47,7 @@ public class ListSurveysSteps implements En {
             // ListSurveysRequest listSurveysRequest = new ListSurveysRequest(1234);
             ListSurveysRequest listSurveysRequest = new ListSurveysRequest();
             this.listSurveysOutputPort = Mockito.mock(ListSurveysOutputPort.class);
-            ListSurveysUseCase listSurveysUseCase = new ListSurveysUseCase(listSurveysOutputPort, surveyEntityGateway);
+            ListSurveysUseCase listSurveysUseCase = new ListSurveysUseCase(this.listSurveysOutputPort, surveyEntityGateway);
             listSurveysUseCase.listSurveys(listSurveysRequest);
         });
         Then("^the user receives a list containing (\\d+) surveys$", (Integer numberOfSurveys) -> {

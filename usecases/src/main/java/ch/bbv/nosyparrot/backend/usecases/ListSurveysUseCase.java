@@ -35,7 +35,7 @@ public class ListSurveysUseCase implements ListSurveysInputPort {
         ListSurveysResponse listSurveysResponse = new ListSurveysResponse(surveyList);
 
         // Pass the response model to the boundary.
-        listSurveysOutputPort.presentListOfSurveys(listSurveysResponse);
+        this.listSurveysOutputPort.presentListOfSurveys(listSurveysResponse);
 
     }
 }
