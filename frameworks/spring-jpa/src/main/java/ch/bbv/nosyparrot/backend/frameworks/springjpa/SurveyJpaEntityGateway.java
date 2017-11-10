@@ -34,6 +34,13 @@ public class SurveyJpaEntityGateway implements SurveyEntityGateway {
         return this.getAll();
     }
 
+    @Override
+    public Survey getByIdentifier(long surveyIdentifier) {
+        SurveyJpaEntity surveyJpaEntity = surveyJpaEntityRepository.findOne(String.valueOf(surveyIdentifier));
+
+        return this.toDomain(surveyJpaEntity);
+    }
+
     private Survey toDomain(SurveyJpaEntity entity) {
         return SurveyFactory.create().createSurvey(
                 entity.getId(),

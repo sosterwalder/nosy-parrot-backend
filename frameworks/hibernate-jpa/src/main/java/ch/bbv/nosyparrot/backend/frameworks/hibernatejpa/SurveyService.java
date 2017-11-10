@@ -11,18 +11,18 @@ public class SurveyService implements SurveyEntityGateway {
     private static SurveyDao surveyDao;
 
     public SurveyService() {
-        this.surveyDao = new SurveyDao();
+        surveyDao = new SurveyDao();
     }
 
     @Override
     public List<Survey> getAll() {
         List<Survey> surveyList = new ArrayList<>();
 
-        this.surveyDao.openCurrentSession();
-        this.surveyDao.findAll().forEach(surveyJpaEntity -> surveyList.add(
+        surveyDao.openCurrentSession();
+        surveyDao.findAll().forEach(surveyJpaEntity -> surveyList.add(
                 this.surveyJpaEntityToDomain(surveyJpaEntity)
         ));
-        this.surveyDao.closeCurrentSession();
+        surveyDao.closeCurrentSession();
 
         return surveyList;
     }
@@ -37,6 +37,15 @@ public class SurveyService implements SurveyEntityGateway {
 
         // TODO: Fix this
         return this.getAll();
+    }
+
+    @Override
+    public Survey getByIdentifier(long surveyIdentifier) {
+        surveyDao.openCurrentSession();
+        SurveyJpaEntity surveyJpaEntity = surveyDao.findById(surveyIdentifier);
+        surveyDao.closeCurrentSession();
+
+        return this.surveyJpaEntityToDomain(surveyJpaEntity);
     }
 
     private Survey surveyJpaEntityToDomain(SurveyJpaEntity entity) {

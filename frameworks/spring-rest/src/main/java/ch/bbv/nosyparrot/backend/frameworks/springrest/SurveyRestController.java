@@ -1,14 +1,10 @@
 package ch.bbv.nosyparrot.backend.frameworks.springrest;
 
 import ch.bbv.nosyparrot.backend.core.entity.Survey;
-import ch.bbv.nosyparrot.backend.interfaces.CreateSurveysController;
-import ch.bbv.nosyparrot.backend.interfaces.ListSurveysController;
-import ch.bbv.nosyparrot.backend.interfaces.ListSurveysPresenter;
-import ch.bbv.nosyparrot.backend.interfaces.ListSurveysViewModel;
-import ch.bbv.nosyparrot.backend.interfaces.output.CreateSurveysPresenter;
-import ch.bbv.nosyparrot.backend.interfaces.output.CreateSurveysViewModel;
-import ch.bbv.nosyparrot.backend.usecases.CreateSurveysUseCase;
-import ch.bbv.nosyparrot.backend.usecases.ListSurveysUseCase;
+import ch.bbv.nosyparrot.backend.interactors.SurveyInteractor;
+import ch.bbv.nosyparrot.backend.interfaces.SurveyController;
+import ch.bbv.nosyparrot.backend.interfaces.output.ListSurveysViewModel;
+import ch.bbv.nosyparrot.backend.interfaces.output.SurveyPresenter;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,38 +12,30 @@ import java.util.List;
 
 @RestController
 public class SurveyRestController {
-    private final ListSurveysUseCase listSurveysUseCase;
-    private final ListSurveysPresenter listSurveysPresenter;
-    private final CreateSurveysUseCase createSurveysUseCase;
-    private final CreateSurveysPresenter createSurveysPresenter;
+    private final SurveyController surveyController;
+    private final SurveyPresenter surveyPresenter;
 
     public SurveyRestController(
-            ListSurveysUseCase listSurveysUseCase,
-            ListSurveysPresenter listSurveysPresenter,
-            CreateSurveysUseCase createSurveysUseCase,
-            CreateSurveysPresenter createSurveysPresenter
+            SurveyController surveyController,
+            SurveyPresenter surveyPresenter
     ) {
-        this.listSurveysUseCase = listSurveysUseCase;
-        this.listSurveysPresenter = listSurveysPresenter;
-        this.createSurveysUseCase = createSurveysUseCase;
-        this.createSurveysPresenter = createSurveysPresenter;
+        this.surveyController = surveyController;
+        this.surveyPresenter = surveyPresenter;
     }
 
     @RequestMapping("/surveys")
     public List<Survey> surveys() {
-        ListSurveysController listSurveysController = new ListSurveysController(listSurveysUseCase);
-        listSurveysController.getSurveys();
-        ListSurveysViewModel listSurveysViewModel = this.listSurveysPresenter.getListSurveysViewModel();
+        this.surveyController.getSurveys();
+        ListSurveysViewModel listSurveysViewModel = (ListSurveysViewModel) this.surveyPresenter.getSurveyViewModel();
 
         return listSurveysViewModel.getSurveyList();
     }
 
     @PostMapping(value = "/surveys/new")
     public List<Survey> createSurvey(@RequestBody String surveyTitle) {
-        CreateSurveysController createSurveysController = new CreateSurveysController(createSurveysUseCase);
-        createSurveysController.createSurvey(surveyTitle);
-        CreateSurveysViewModel createSurveysViewModel = this.createSurveysPresenter.getCreateSurveysViewModel();
+        this.surveyController.createSurvey(surveyTitle);
+        ListSurveysViewModel viewModel = (ListSurveysViewModel) this.surveyPresenter.getSurveyViewModel();
 
-        return createSurveysViewModel.getSurveyList();
+        return viewModel.getSurveyList();
     }
 }

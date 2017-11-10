@@ -1,16 +1,15 @@
 package ch.bbv.nosyparrot.backend.interfaces.step_definitions;
 
-import ch.bbv.nosyparrot.backend.interfaces.ListSurveysController;
-import ch.bbv.nosyparrot.backend.interfaces.ListSurveysPresenter;
-import ch.bbv.nosyparrot.backend.interfaces.ListSurveysViewModel;
-import ch.bbv.nosyparrot.backend.interfaces.output.ListSurveysPresenterOutputPort;
+import ch.bbv.nosyparrot.backend.interactors.input.SurveyInputPort;
+import ch.bbv.nosyparrot.backend.interactors.output.ListSurveysResponse;
+import ch.bbv.nosyparrot.backend.interfaces.SurveyController;
+import ch.bbv.nosyparrot.backend.interfaces.output.ListSurveysViewModel;
 import ch.bbv.nosyparrot.backend.core.entity.Survey;
 import ch.bbv.nosyparrot.backend.core.entity.User;
-import ch.bbv.nosyparrot.backend.usecases.input.ListSurveysInputPort;
-import ch.bbv.nosyparrot.backend.usecases.input.ListSurveysRequest;
-import ch.bbv.nosyparrot.backend.usecases.output.ListSurveysResponse;
+import ch.bbv.nosyparrot.backend.interfaces.output.SurveyPresenter;
 import cucumber.api.java8.En;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 
+@SuppressWarnings("unused")
 public class ListSurveysSteps implements En {
     private User surveyUser;
     private List<Survey> surveyList;
@@ -40,27 +40,20 @@ public class ListSurveysSteps implements En {
             });
         });
         And("^he asks to retrieve his list of surveys$", () -> {
-            ListSurveysInputPort listSurveysInputPort = mock(ListSurveysInputPort.class);
-            ListSurveysController listSurveysController = new ListSurveysController(listSurveysInputPort);
-
-            // listSurveysController.getSurveysForUserId(this.surveyUser.getId());
-            listSurveysController.getSurveys();
-
-            // ArgumentCaptor<ListSurveysRequest> listSurveysRequestArgumentCaptor = ArgumentCaptor.forClass(ListSurveysRequest.class);
-            // verify(listSurveysInputPort, times(1)).listSurveys(listSurveysRequestArgumentCaptor.capture());
-            // final long receivedUserId = listSurveysRequestArgumentCaptor.getValue()
-            // assertThat(receivedUserId).isEqualTo(ListSurveysSteps.userId);
+            SurveyInputPort surveyInputPort = Mockito.mock(SurveyInputPort.class);
+            SurveyController surveyController = new SurveyController(surveyInputPort);
+            surveyController.getSurveys();
         });
         Then("^the user receives a list containing (\\d+) surveys$", (Integer numberOfExpectedSurveys) -> {
-            ListSurveysPresenter listSurveysPresenter = new ListSurveysPresenter();
+            SurveyPresenter surveyPresenter = new SurveyPresenter();
 
             ListSurveysResponse listSurveysResponse = mock(ListSurveysResponse.class);
             when(listSurveysResponse.getSurveyList()).thenReturn(this.surveyList);
 
-            listSurveysPresenter.presentListOfSurveys(listSurveysResponse);
+            surveyPresenter.presentListOfSurveys(listSurveysResponse);
 
             ArgumentCaptor<ListSurveysViewModel> listSurveysViewModelArgumentCaptor = ArgumentCaptor.forClass(ListSurveysViewModel.class);
-            ListSurveysViewModel receivedSurveysViewModel = listSurveysPresenter.getListSurveysViewModel();
+            ListSurveysViewModel receivedSurveysViewModel = (ListSurveysViewModel) surveyPresenter.getSurveyViewModel();
             List<Survey> receivedSurveys = receivedSurveysViewModel.getSurveyList();
 
             assertThat(receivedSurveys).hasSize(numberOfExpectedSurveys);
