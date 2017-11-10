@@ -6,8 +6,6 @@ import org.junit.runner.RunWith;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(
-        features = "classpath:features"
-)
+@CucumberOptions(features = "../features")
 public class InteractorsCucumberTestRunner {}
 
