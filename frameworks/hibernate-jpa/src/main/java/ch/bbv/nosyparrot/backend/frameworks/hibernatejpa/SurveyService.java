@@ -29,7 +29,8 @@ public class SurveyService implements SurveyEntityGateway {
 
     @Override
     public List<Survey> create(String title) {
-        SurveyJpaEntity surveyJpaEntity = new SurveyJpaEntity(title);
+        SurveyJpaEntity surveyJpaEntity = new SurveyJpaEntity();
+        surveyJpaEntity.setTitle(title);
 
         surveyDao.openCurrentSessionWithTransaction();
         surveyDao.persist(surveyJpaEntity);

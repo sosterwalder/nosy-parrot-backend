@@ -5,12 +5,10 @@ import ch.bbv.nosyparrot.backend.frameworks.hibernatejpa.SurveyService;
 import ch.bbv.nosyparrot.backend.interactors.SurveyInteractor;
 import ch.bbv.nosyparrot.backend.interfaces.SurveyController;
 import ch.bbv.nosyparrot.backend.interfaces.output.ListSurveysViewModel;
+import ch.bbv.nosyparrot.backend.interfaces.output.SurveyDetailsViewModel;
 import ch.bbv.nosyparrot.backend.interfaces.output.SurveyPresenter;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -36,6 +34,16 @@ public class SurveyRestService {
         ListSurveysViewModel listSurveysViewModel = (ListSurveysViewModel) this.surveyPresenter.getSurveyViewModel();
 
         return listSurveysViewModel.getSurveyList();
+    }
+
+    @GET
+    @Path("{surveyId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Survey getSurveyById(@PathParam("surveyId") long surveyId) {
+        this.surveyController.getSurveyDetails(surveyId);
+        SurveyDetailsViewModel detailsViewModel = (SurveyDetailsViewModel) this.surveyPresenter.getSurveyViewModel();
+
+        return detailsViewModel.getSurvey();
     }
 
     @POST
