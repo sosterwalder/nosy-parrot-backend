@@ -43,7 +43,7 @@ public class SurveyRestController {
     }
 
     @SuppressWarnings("unused")
-    @RequestMapping("/survey/{surveyId}")
+    @RequestMapping("/surveys/{surveyId}")
     public Survey getSurveyDetails(@PathVariable(value = "surveyId") long surveyId) {
         this.surveyController.getSurveyDetails(surveyId);
         SurveyDetailsViewModel viewModel = (SurveyDetailsViewModel) this.surveyPresenter.getSurveyViewModel();
