@@ -19,32 +19,29 @@ import static org.mockito.Mockito.when;
 @SuppressWarnings("unused")
 public class CreateSurveysSteps implements En {
     private CreateSurveyResponse createSurveysResponse;
-    private static long surveyId = 123L;
-    private static String surveyTitle = "surveyTitle";
 
     public CreateSurveysSteps() {
-        Given("^I am a logged-in User$", () -> {
-            // TODO: Mock user
-        });
-        When("^I create a new survey with a title but without questions$", () -> {
+        When("^I create a new survey called \"([^\"]*)\" but without questions$", (String givenSurveyTitle) -> {
+            long surveyId = 123L;
+
             SurveyInputPort surveyInputPort = Mockito.mock(SurveyInputPort.class);
             SurveyController surveyController = new SurveyController(surveyInputPort);
 
             this.createSurveysResponse = Mockito.mock(CreateSurveyResponse.class);
-            Survey expectedSurvey = new Survey(CreateSurveysSteps.surveyId, CreateSurveysSteps.surveyTitle);
+            Survey expectedSurvey = new Survey(surveyId, givenSurveyTitle);
             List<Survey> expectedSurveyList = new ArrayList<>();
             expectedSurveyList.add(expectedSurvey);
             when(this.createSurveysResponse.getSurveyList()).thenReturn(expectedSurveyList);
 
-            surveyController.createSurvey(CreateSurveysSteps.surveyTitle);
+            surveyController.createSurvey(givenSurveyTitle);
         });
-        Then("^the survey should appear in my list of surveys$", () -> {
+        Then("^the survey \"([^\"]*)\" should appear in my list of surveys$", (String expectedSurveyTitle) -> {
             SurveyPresenter surveyPresenter = new SurveyPresenter();
             surveyPresenter.presentCreationOfSurvey(this.createSurveysResponse);
 
             ListSurveysViewModel viewModel = (ListSurveysViewModel) surveyPresenter.getSurveyViewModel();
             List<Survey> receivedSurveys = viewModel.getSurveyList();
-            assertThat(receivedSurveys).extracting("title").contains(CreateSurveysSteps.surveyTitle);
+            assertThat(receivedSurveys).extracting("title").contains(expectedSurveyTitle);
         });
     }
 }

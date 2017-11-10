@@ -21,30 +21,25 @@ import static org.mockito.Mockito.*;
 
 @SuppressWarnings("unused")
 public class ListSurveysSteps implements En {
-    private User surveyUser;
     private List<Survey> surveyList;
     private static long userId = 123L;
     private static long surveyId = 123L;
     private static String surveyTitle = "surveyTitle";
 
     public ListSurveysSteps() {
-        Given("^a user is logged in$", () -> {
-            this.surveyUser = mock(User.class);
-            when(this.surveyUser.getId()).thenReturn(ListSurveysSteps.userId);
-        });
-        When("^the user has created (\\d+) surveys$", (Integer numberOfCreatedSurveys) -> {
+        When("^\"([^\"]*)\" has created (\\d+) surveys$", (String username, Integer numberOfCreatedSurveys) -> {
             this.surveyList = new ArrayList<>();
             IntStream.range(0, numberOfCreatedSurveys).forEachOrdered(n -> {
                 Survey tempSurvey = new Survey(ListSurveysSteps.surveyId, ListSurveysSteps.surveyTitle);
                 this.surveyList.add(tempSurvey);
             });
         });
-        And("^he asks to retrieve his list of surveys$", () -> {
+        And("^she asks to retrieve her list of surveys$", () -> {
             SurveyInputPort surveyInputPort = Mockito.mock(SurveyInputPort.class);
             SurveyController surveyController = new SurveyController(surveyInputPort);
             surveyController.getSurveys();
         });
-        Then("^the user receives a list containing (\\d+) surveys$", (Integer numberOfExpectedSurveys) -> {
+        Then("^she receives a list containing (\\d+) surveys$", (Integer numberOfExpectedSurveys) -> {
             SurveyPresenter surveyPresenter = new SurveyPresenter();
 
             ListSurveysResponse listSurveysResponse = mock(ListSurveysResponse.class);
