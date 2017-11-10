@@ -4,13 +4,14 @@ Feature: List surveys
   all my surveys.
 
   Background:
-    Given a user is logged in
+    Given a registered user named "Betty"
+    And I am a logged-in as "Betty"
 
   Scenario Outline: A user lists his surveys
 
-    When the user has created <input> surveys
-    And he asks to retrieve his list of surveys
-    Then the user receives a list containing <output> surveys
+    When "Betty" has created <input> surveys
+    And she asks to retrieve her list of surveys
+    Then she receives a list containing <output> surveys
 
     Examples:
       | input | output |
