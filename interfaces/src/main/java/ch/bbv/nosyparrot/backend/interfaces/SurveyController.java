@@ -6,7 +6,6 @@ import ch.bbv.nosyparrot.backend.interactors.input.SurveyRequest;
 public class SurveyController {
     private final SurveyInputPort surveyInputPort;
 
-
     public SurveyController(SurveyInputPort surveyInputPort) {
         this.surveyInputPort = surveyInputPort;
     }
@@ -20,5 +19,10 @@ public class SurveyController {
     public void getSurveys() {
         SurveyRequest surveyRequest = new SurveyRequest();
         this.surveyInputPort.listSurveys(surveyRequest);
+    }
+
+    public void getSurveyDetails(long surveyId) {
+        SurveyRequest surveyRequest = new SurveyRequest();
+        this.surveyInputPort.getSurveyDetails(surveyRequest);
     }
 }
