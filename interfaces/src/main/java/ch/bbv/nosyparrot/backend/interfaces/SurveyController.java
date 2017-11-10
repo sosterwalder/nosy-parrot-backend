@@ -23,6 +23,7 @@ public class SurveyController {
 
     public void getSurveyDetails(long surveyId) {
         SurveyRequest surveyRequest = new SurveyRequest();
+        surveyRequest.setSurveyId(surveyId);
         this.surveyInputPort.getSurveyDetails(surveyRequest);
     }
 }

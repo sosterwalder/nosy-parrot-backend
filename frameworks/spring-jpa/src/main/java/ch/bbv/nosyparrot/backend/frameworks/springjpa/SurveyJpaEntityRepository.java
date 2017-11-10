@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface SurveyJpaEntityRepository extends CrudRepository<SurveyJpaEntity, String> {
+public interface SurveyJpaEntityRepository extends CrudRepository<SurveyJpaEntity, Long> {
 }
