@@ -18,11 +18,9 @@ public class SurveyService implements SurveyEntityGateway {
     public List<Survey> getAll() {
         List<Survey> surveyList = new ArrayList<>();
 
-        surveyDao.openCurrentSession();
         surveyDao.findAll().forEach(surveyJpaEntity -> surveyList.add(
                 this.surveyJpaEntityToDomain(surveyJpaEntity)
         ));
-        surveyDao.closeCurrentSession();
 
         return surveyList;
     }
@@ -31,10 +29,7 @@ public class SurveyService implements SurveyEntityGateway {
     public List<Survey> create(String title) {
         SurveyJpaEntity surveyJpaEntity = new SurveyJpaEntity();
         surveyJpaEntity.setTitle(title);
-
-        surveyDao.openCurrentSessionWithTransaction();
-        surveyDao.persist(surveyJpaEntity);
-        surveyDao.closeCurrentSessionWithTransaction();
+        surveyDao.save(surveyJpaEntity);
 
         // TODO: Fix this
         return this.getAll();
@@ -42,9 +37,7 @@ public class SurveyService implements SurveyEntityGateway {
 
     @Override
     public Survey getByIdentifier(long surveyIdentifier) {
-        surveyDao.openCurrentSession();
         SurveyJpaEntity surveyJpaEntity = surveyDao.findById(surveyIdentifier);
-        surveyDao.closeCurrentSession();
 
         return this.surveyJpaEntityToDomain(surveyJpaEntity);
     }
