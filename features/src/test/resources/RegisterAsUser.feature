@@ -7,9 +7,9 @@ Feature: Register as user
 
   Scenario: A guest registers himself successfully as a user
     When I register myself as user "someuser" with the password "123Qwe"
-    Then I am registered within the system
+    Then I am registered within the system as user "someuser"
 
-  Scenario: A registered user authenticates himself
-    Given I am a registered user
-    When I authenticate myself
-    Then I receive a confirmation that I am authenticated
+#  Scenario: A registered user authenticates himself
+#    Given I am a registered user
+#    When I authenticate myself
+#    Then I receive a confirmation that I am authenticated
