@@ -18,7 +18,7 @@ public class SurveyJpaEntityGateway implements SurveyEntityGateway {
     @Override
     public List<Survey> getAll() {
         List<Survey> surveyList = new ArrayList<>();
-        surveyJpaEntityRepository.findAll().forEach(it -> surveyList.add(
+        this.surveyJpaEntityRepository.findAll().forEach(it -> surveyList.add(
                 this.toDomain(it)
         ));
 
@@ -28,7 +28,7 @@ public class SurveyJpaEntityGateway implements SurveyEntityGateway {
     @Override
     public List<Survey> create(String title) {
         SurveyJpaEntity surveyJpaEntity = new SurveyJpaEntity(title);
-        surveyJpaEntityRepository.save(surveyJpaEntity);
+        this.surveyJpaEntityRepository.save(surveyJpaEntity);
 
         // TODO: Fix this
         return this.getAll();
@@ -36,7 +36,7 @@ public class SurveyJpaEntityGateway implements SurveyEntityGateway {
 
     @Override
     public Survey getByIdentifier(long surveyIdentifier) {
-        SurveyJpaEntity surveyJpaEntity = surveyJpaEntityRepository.findOne(surveyIdentifier);
+        SurveyJpaEntity surveyJpaEntity = this.surveyJpaEntityRepository.findOne(surveyIdentifier);
 
         return this.toDomain(surveyJpaEntity);
     }
