@@ -6,6 +6,7 @@ include 'interactors'
 include 'interfaces'
 include ':frameworks:hibernate-jpa'
 include ':frameworks:jersey-rest'
+include ':frameworks:wildfly-jaxrs'
 include ':frameworks:spring-jpa'
 include ':frameworks:spring-rest'
 

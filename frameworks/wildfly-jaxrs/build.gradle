@@ -1,0 +1,48 @@
+apply plugin: 'application'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'java'
+apply plugin: 'wildfly-swarm'
+
+sourceCompatibility = 1.8
+mainClassName = "ch.bbv.nosyparrot.backend.frameworks.wildflyjaxrs.Main"
+
+buildscript {
+    version = '2017.8.0'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
+        classpath("org.wildfly.swarm:wildfly-swarm-gradle-plugin:$version")
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "http://repository.jboss.org/nexus/content/groups/public/"
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.wildfly.swarm:bom-all:$version"
+    }
+}
+
+dependencies {
+    compile project(':interfaces')
+    compile project(':frameworks:hibernate-jpa')
+    compile group: 'com.h2database', name: 'h2', version: '1.4.+'
+    compile group: 'io.swagger', name: 'swagger-annotations', version: '1.5.5'
+    compile group: 'javax.enterprise', name: 'cdi-api', version: '1.2'
+    compile "org.wildfly.swarm:cdi:$version"
+    compile "org.wildfly.swarm:jaxrs:$version"
+
+    testCompile project(':interfaces')
+    compile project(':frameworks:hibernate-jpa')
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
