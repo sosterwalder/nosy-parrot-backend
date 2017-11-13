@@ -8,6 +8,7 @@ import ch.bbv.nosyparrot.backend.interactors.output.SignUpUserResponse;
 import ch.bbv.nosyparrot.backend.interactors.output.UserOutputPort;
 import cucumber.api.java8.En;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,7 +16,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings("unused")
 public class RegisterAsUserSteps implements En {
-    private UserEntityGateway userEntityGateway;
     private UserOutputPort userOutputPort;
 
     public RegisterAsUserSteps() {
@@ -23,17 +23,14 @@ public class RegisterAsUserSteps implements En {
             this.userOutputPort = Mockito.mock(UserOutputPort.class);
             UserEntityGateway userEntityGateway = Mockito.mock(UserEntityGateway.class);
 
-            User expectedUser = new User
-            Survey expectedSurvey = new Survey(CreateSurveysSteps.surveyId, givenSurveyTitle);
-            List<Survey> expectedSurveyList = new ArrayList<>();
-            expectedSurveyList.add(expectedSurvey);
-            when(this.surveyEntityGateway.create(anyString())).thenReturn(expectedSurveyList);
+            User expectedUser = new User(username, password);
+            Mockito.when(userEntityGateway.create(username, password)).thenReturn(expectedUser);
 
             UserRequest userRequest = new UserRequest();
             userRequest.setUsername(username);
             userRequest.setPassword(password);
 
-            UserInteractor userInteractor = new UserInteractor(this.userOutputPort, this.userEntityGateway);
+            UserInteractor userInteractor = new UserInteractor(this.userOutputPort, userEntityGateway);
             userInteractor.signUp(userRequest);
         });
         Then("^I am registered within the system as user \"([^\"]*)\"$", (String expectedUsername) -> {
@@ -42,7 +39,7 @@ public class RegisterAsUserSteps implements En {
             SignUpUserResponse signUpUserResponse = signUpUserResponseArgumentCaptor.getValue();
 
             User receivedUser = signUpUserResponse.getUser();
-            assertThat(receivedUser).extracting("username").isEqualTo(expectedUsername);
+            assertThat(receivedUser.getUsername()).isEqualTo(expectedUsername);
         });
     }
 
